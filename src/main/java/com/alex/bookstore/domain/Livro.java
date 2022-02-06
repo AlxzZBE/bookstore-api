@@ -40,6 +40,7 @@ public class Livro implements Serializable{
         this.titulo = titulo;
         this.name_autor = name_autor;
         this.text = text;
+        this.categoria = categoria;
     }
 
 }
