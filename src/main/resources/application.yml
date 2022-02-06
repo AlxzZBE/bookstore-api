@@ -1,0 +1,26 @@
+### Habilitar acesso ao H2 Console
+spring:
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
+
+### Definir Confi do H2
+    sql:
+        init:
+          platform: h2
+    datasource:
+        url: jdbc:h2:mem:test
+        username: sa
+        password: 
+        driver-class-name: org.h2.Driver
+
+    jpa:
+        show-sql: true
+        properties:
+            hibernate:
+                    "[format_sql]": true
+                    hbm2ddl:
+                        auto: update
+        hibernate:
+                ddl-auto: update
