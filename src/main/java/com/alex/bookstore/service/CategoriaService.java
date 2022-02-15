@@ -1,6 +1,7 @@
 package com.alex.bookstore.service;
 
 import com.alex.bookstore.domain.Categoria;
+import com.alex.bookstore.dtos.CategoriaDTO;
 import com.alex.bookstore.repositories.CategoriaRepository;
 import com.alex.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,8 @@ public class CategoriaService {
         return repository.findAll();
     }
 
-
+    public Categoria create(Categoria obj) {
+        obj.setId(null);
+        return repository.save(obj);
+    }
 }

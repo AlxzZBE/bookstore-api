@@ -22,5 +22,4 @@ spring:
                     "[format_sql]": true
                     hbm2ddl:
                         auto: update
-        hibernate:
-                ddl-auto: update
+                    ddl-auto: update
