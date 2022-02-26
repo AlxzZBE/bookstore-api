@@ -13,6 +13,7 @@ import java.util.Optional;
 @Service
 public class CategoriaService {
 
+    public Categoria update;
     @Autowired
     private CategoriaRepository repository;
 
@@ -28,6 +29,14 @@ public class CategoriaService {
 
     public Categoria create(Categoria obj) {
         obj.setId(null);
+        return repository.save(obj);
+    }
+
+    public Categoria update(Integer id, CategoriaDTO objDTO) {
+        Categoria obj = findById(id);
+
+        obj.setName(objDTO.getName());
+        obj.setDesc(objDTO.getDesc());
         return repository.save(obj);
     }
 }
