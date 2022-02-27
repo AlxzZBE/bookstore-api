@@ -6,7 +6,9 @@ import com.alex.bookstore.repositories.LivroRepository;
 import com.alex.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -52,5 +54,13 @@ public class LivroService {
             newObj.setName_autor(obj.getName_autor());
         if (obj.getText() != null)
             newObj.setText(obj.getText());
+    }
+
+    public Livro create(Integer id_cat, Livro obj) {
+        Categoria cat = categoriaService.findById(id_cat);
+        obj.setId(null);
+        obj.setCategoria(cat);
+
+        return livroRepository.save(obj);
     }
 }
