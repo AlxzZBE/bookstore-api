@@ -2,6 +2,7 @@ package com.alex.bookstore.dtos;
 
 import com.alex.bookstore.domain.Categoria;
 import lombok.Getter;
+
 import java.io.Serializable;
 
 @Getter

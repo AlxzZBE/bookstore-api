@@ -1,7 +1,8 @@
-package com.alex.bookstore.dtos;
+package com.alex.bookstore.dtos.livros;
 
 import com.alex.bookstore.domain.Livro;
 import lombok.Getter;
+
 import java.io.Serializable;
 
 @Getter
