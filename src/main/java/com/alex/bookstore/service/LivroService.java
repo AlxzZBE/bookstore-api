@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class LivroService {
@@ -33,7 +34,23 @@ public class LivroService {
 
     public List<Livro> findAllByCategoriaOrderByTitle(Integer id) {
         Categoria categoria = categoriaService.findById(id);
-        List<Livro> livrosSorted = categoria.getLivros().stream().sorted(Comparator.comparing(Livro::getTitulo)).toList();
+        List<Livro> livrosSorted =
+                categoria.getLivros().stream().sorted(Comparator.comparing(Livro::getTitulo)).toList();
         return livrosSorted;
+    }
+
+    public Livro update(Integer id, Livro obj) {
+        Livro newObj = findById(id);
+        updateData(newObj, obj);
+        return livroRepository.save(newObj);
+    }
+
+    private void updateData(Livro newObj, Livro obj) {
+        if (obj.getTitulo() != null)
+            newObj.setTitulo(obj.getTitulo());
+        if (obj.getName_autor() != null)
+            newObj.setName_autor(obj.getName_autor());
+        if (obj.getText() != null)
+            newObj.setText(obj.getText());
     }
 }

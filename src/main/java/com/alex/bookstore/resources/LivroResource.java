@@ -6,10 +6,7 @@ import com.alex.bookstore.dtos.livros.LivroDTO;
 import com.alex.bookstore.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +31,20 @@ public class LivroResource {
         List<Livro> list = service.findAllByCategoriaOrderByTitle(id);
         List<LivroByCategoriaDTO> listDTO = list.stream().map(LivroByCategoriaDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDTO);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<LivroDTO> update(@PathVariable Integer id, @RequestBody Livro obj){
+        Livro newObj = service.update(id, obj);
+        LivroDTO livroDTO = Stream.of(newObj).map(LivroDTO::new).findFirst().get();
+        return ResponseEntity.ok().body(livroDTO);
+    }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<LivroDTO> updatePatch(@PathVariable Integer id, @RequestBody Livro obj){
+        Livro newObj = service.update(id, obj);
+        LivroDTO livroDTO = Stream.of(newObj).map(LivroDTO::new).findFirst().get();
+        return ResponseEntity.ok().body(livroDTO);
     }
 
 }
