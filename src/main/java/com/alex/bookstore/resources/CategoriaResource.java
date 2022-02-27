@@ -19,18 +19,18 @@ public class CategoriaResource {
     @Autowired
     private CategoriaService service;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
-        Categoria obj = service.findById(id);
-        return ResponseEntity.ok().body(obj);
-    }
-
     @GetMapping
     public ResponseEntity<List<CategoriaDTO>> findAll() {
         List<Categoria> list = service.findAll();
         List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
 
         return ResponseEntity.ok().body(listDTO);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
+        Categoria obj = service.findById(id);
+        return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
@@ -44,5 +44,11 @@ public class CategoriaResource {
     public ResponseEntity<CategoriaDTO> update(@PathVariable Integer id, @RequestBody CategoriaDTO objDTO) {
         Categoria newObj = service.update(id, objDTO);
         return ResponseEntity.ok().body(new CategoriaDTO(newObj));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
