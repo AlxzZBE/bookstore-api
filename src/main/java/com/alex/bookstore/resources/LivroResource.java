@@ -9,11 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/livros")
 public class LivroResource {
@@ -36,14 +38,14 @@ public class LivroResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<LivroDTO> update(@PathVariable Integer id, @RequestBody Livro obj) {
+    public ResponseEntity<LivroDTO> update(@PathVariable Integer id, @Valid @RequestBody Livro obj) {
         Livro newObj = service.update(id, obj);
         LivroDTO livroDTO = Stream.of(newObj).map(LivroDTO::new).findFirst().get();
         return ResponseEntity.ok().body(livroDTO);
     }
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<LivroDTO> updatePatch(@PathVariable Integer id, @RequestBody Livro obj) {
+    public ResponseEntity<LivroDTO> updatePatch(@PathVariable Integer id, @Valid @RequestBody Livro obj) {
         Livro newObj = service.update(id, obj);
         LivroDTO livroDTO = Stream.of(newObj).map(LivroDTO::new).findFirst().get();
         return ResponseEntity.ok().body(livroDTO);
@@ -51,9 +53,10 @@ public class LivroResource {
 
     @PostMapping
     public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat,
-                                        @RequestBody Livro obj) {
+                                        @Valid @RequestBody Livro obj) {
         Livro newObj = service.create(id_cat, obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(newObj.getId()).toUri();
+        URI uri =
+                ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

@@ -25,7 +25,7 @@ public class DBService {
 
         Livro livro1 = new Livro(null, "Clean Code", "Robert Martin", "Lorem Ipsum", cat1);
         Livro livro2 = new Livro(null, "Revelation", "João", "Fim dos Tempos", cat2);
-        Livro livro3 = new Livro(null, "Romanos", "A.P Paulo", "Romanos", cat2);
+        Livro livro3 = new Livro(null, "Romanos", "A.P Paulo", "Romanos ..", cat2);
         Livro livro4 = new Livro(null, "Spring Boot", "Desconhecido", "Spring Boot", cat3);
         Livro livro5 = new Livro(null, "Android", "Desconhecido", "Java For Android", cat3);
 
