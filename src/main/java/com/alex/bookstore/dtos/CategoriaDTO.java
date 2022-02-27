@@ -2,12 +2,9 @@ package com.alex.bookstore.dtos;
 
 import com.alex.bookstore.domain.Categoria;
 import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 
 @Getter
-@Setter
 public class CategoriaDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
