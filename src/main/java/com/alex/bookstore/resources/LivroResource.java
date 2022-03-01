@@ -30,9 +30,9 @@ public class LivroResource {
         return ResponseEntity.ok().body(livroDTO);
     }
 
-    @GetMapping(value = "/categoria/{id}")
-    public ResponseEntity<List<LivroByCategoriaDTO>> findAllByCategoriaOrderByTitle(@PathVariable Integer id) {
-        List<Livro> list = service.findAllByCategoriaOrderByTitle(id);
+    @GetMapping()
+    public ResponseEntity<List<LivroByCategoriaDTO>> findAllByCategoriaOrderByTitle(@RequestParam (value = "categoria", defaultValue = "0") Integer id_cat) {
+        List<Livro> list = service.findAllByCategoriaOrderByTitle(id_cat);
         List<LivroByCategoriaDTO> listDTO = list.stream().map(LivroByCategoriaDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDTO);
     }
